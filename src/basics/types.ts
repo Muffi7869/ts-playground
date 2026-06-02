@@ -30,3 +30,7 @@ export function opposite(d: Direction): Direction {
   const map: Record<Direction, Direction> = { north: "south", south: "north", east: "west", west: "east" };
   return map[d];
 }
+
+export function clamp(n: number, min = 0, max = 1): number {
+  return Math.min(max, Math.max(min, n));
+}
