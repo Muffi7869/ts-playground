@@ -41,3 +41,7 @@ export function once<T extends unknown[], R>(fn: (...args: T) => R): (...args: T
     return result;
   };
 }
+
+export function curry3<A, B, C, R>(fn: (a: A, b: B, c: C) => R) {
+  return (a: A) => (b: B) => (c: C) => fn(a, b, c);
+}
