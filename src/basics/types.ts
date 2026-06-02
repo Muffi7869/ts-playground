@@ -17,3 +17,7 @@ export function distance(a: Point, b: Point): number {
 }
 
 export type Tuple3 = [string, number, boolean];
+
+export function swapPair<A, B>(pair: [A, B]): [B, A] {
+  return [pair[1], pair[0]];
+}
