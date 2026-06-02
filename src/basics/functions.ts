@@ -29,3 +29,15 @@ export function memoize<A extends string | number, R>(fn: (a: A) => R): (a: A) =
     return cache.get(a)!;
   };
 }
+
+export function once<T extends unknown[], R>(fn: (...args: T) => R): (...args: T) => R {
+  let called = false;
+  let result: R;
+  return (...args) => {
+    if (!called) {
+      called = true;
+      result = fn(...args);
+    }
+    return result;
+  };
+}
