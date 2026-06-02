@@ -21,3 +21,11 @@ export function compose<A, B, C>(f: (b: B) => C, g: (a: A) => B): (a: A) => C {
 export function pipe<T>(value: T, ...fns: Array<(v: T) => T>): T {
   return fns.reduce((acc, fn) => fn(acc), value);
 }
+
+export function memoize<A extends string | number, R>(fn: (a: A) => R): (a: A) => R {
+  const cache = new Map<A, R>();
+  return (a) => {
+    if (!cache.has(a)) cache.set(a, fn(a));
+    return cache.get(a)!;
+  };
+}
