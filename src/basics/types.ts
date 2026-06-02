@@ -9,3 +9,5 @@ export function describe(value: unknown): string {
   if (value === null) return "null";
   return typeof value;
 }
+
+export type Point = { x: number; y: number };
