@@ -25,3 +25,8 @@ export function swapPair<A, B>(pair: [A, B]): [B, A] {
 export const DIRECTIONS = ["north", "south", "east", "west"] as const;
 
 export type Direction = (typeof DIRECTIONS)[number];
+
+export function opposite(d: Direction): Direction {
+  const map: Record<Direction, Direction> = { north: "south", south: "north", east: "west", west: "east" };
+  return map[d];
+}
