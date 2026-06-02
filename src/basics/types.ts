@@ -1,3 +1,11 @@
 // basic types and type annotations
 
 export const appName: string = "ts-playground";
+
+export function describe(value: unknown): string {
+  if (typeof value === "string") return `string(${value.length})`;
+  if (typeof value === "number") return Number.isInteger(value) ? "int" : "float";
+  if (Array.isArray(value)) return `array(${value.length})`;
+  if (value === null) return "null";
+  return typeof value;
+}
