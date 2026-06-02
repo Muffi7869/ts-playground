@@ -17,3 +17,7 @@ export function parse(input: string | string[]): number | number[] {
 export function compose<A, B, C>(f: (b: B) => C, g: (a: A) => B): (a: A) => C {
   return (a) => f(g(a));
 }
+
+export function pipe<T>(value: T, ...fns: Array<(v: T) => T>): T {
+  return fns.reduce((acc, fn) => fn(acc), value);
+}
