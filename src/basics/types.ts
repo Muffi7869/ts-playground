@@ -23,3 +23,5 @@ export function swapPair<A, B>(pair: [A, B]): [B, A] {
 }
 
 export const DIRECTIONS = ["north", "south", "east", "west"] as const;
+
+export type Direction = (typeof DIRECTIONS)[number];
