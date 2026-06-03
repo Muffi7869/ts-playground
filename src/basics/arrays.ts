@@ -26,3 +26,10 @@ export function partition<T>(arr: readonly T[], pred: (item: T) => boolean): [T[
 export function zip<A, B>(a: readonly A[], b: readonly B[]): [A, B][] {
   return a.slice(0, Math.min(a.length, b.length)).map((x, i) => [x, b[i]]);
 }
+
+export function range(start: number, end?: number, step = 1): number[] {
+  if (end === undefined) [start, end] = [0, start];
+  const out: number[] = [];
+  for (let i = start; step > 0 ? i < end : i > end; i += step) out.push(i);
+  return out;
+}
