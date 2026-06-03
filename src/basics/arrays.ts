@@ -22,3 +22,7 @@ export function partition<T>(arr: readonly T[], pred: (item: T) => boolean): [T[
   for (const item of arr) (pred(item) ? yes : no).push(item);
   return [yes, no];
 }
+
+export function zip<A, B>(a: readonly A[], b: readonly B[]): [A, B][] {
+  return a.slice(0, Math.min(a.length, b.length)).map((x, i) => [x, b[i]]);
+}
