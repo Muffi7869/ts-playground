@@ -9,3 +9,9 @@ export function chunk<T>(arr: readonly T[], size: number): T[][] {
 export function unique<T>(arr: readonly T[]): T[] {
   return [...new Set(arr)];
 }
+
+export function groupBy<T, K extends PropertyKey>(arr: readonly T[], key: (item: T) => K): Record<K, T[]> {
+  const out = {} as Record<K, T[]>;
+  for (const item of arr) (out[key(item)] ??= []).push(item);
+  return out;
+}
