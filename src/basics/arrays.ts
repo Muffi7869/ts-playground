@@ -15,3 +15,10 @@ export function groupBy<T, K extends PropertyKey>(arr: readonly T[], key: (item:
   for (const item of arr) (out[key(item)] ??= []).push(item);
   return out;
 }
+
+export function partition<T>(arr: readonly T[], pred: (item: T) => boolean): [T[], T[]] {
+  const yes: T[] = [];
+  const no: T[] = [];
+  for (const item of arr) (pred(item) ? yes : no).push(item);
+  return [yes, no];
+}
