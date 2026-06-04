@@ -26,3 +26,9 @@ test("range works like python", () => {
   assert.deepEqual(range(4), [0, 1, 2, 3]);
   assert.deepEqual(range(10, 0, -3), [10, 7, 4, 1]);
 });
+
+test("sortBy does not mutate", () => {
+  const input = [{ n: 3 }, { n: 1 }, { n: 2 }];
+  assert.deepEqual(sortBy(input, (x) => x.n).map((x) => x.n), [1, 2, 3]);
+  assert.equal(input[0].n, 3);
+});
