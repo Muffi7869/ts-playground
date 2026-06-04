@@ -13,3 +13,7 @@ test("unique keeps first occurrence order", () => {
 test("groupBy groups words by length", () => {
   assert.deepEqual(groupBy(["a", "bb", "cc", "d"], (w) => w.length), { 1: ["a", "d"], 2: ["bb", "cc"] });
 });
+
+test("partition splits by predicate", () => {
+  assert.deepEqual(partition([1, 2, 3, 4], (n) => n % 2 === 0), [[2, 4], [1, 3]]);
+});
