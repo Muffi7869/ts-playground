@@ -9,3 +9,7 @@ test("chunk splits evenly and keeps the remainder", () => {
 test("unique keeps first occurrence order", () => {
   assert.deepEqual(unique([3, 1, 3, 2, 1]), [3, 1, 2]);
 });
+
+test("groupBy groups words by length", () => {
+  assert.deepEqual(groupBy(["a", "bb", "cc", "d"], (w) => w.length), { 1: ["a", "d"], 2: ["bb", "cc"] });
+});
