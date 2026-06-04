@@ -33,3 +33,7 @@ export function range(start: number, end?: number, step = 1): number[] {
   for (let i = start; step > 0 ? i < end : i > end; i += step) out.push(i);
   return out;
 }
+
+export function sortBy<T>(arr: readonly T[], key: (item: T) => number | string): T[] {
+  return [...arr].sort((a, b) => (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0));
+}
