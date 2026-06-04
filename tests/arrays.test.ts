@@ -17,3 +17,7 @@ test("groupBy groups words by length", () => {
 test("partition splits by predicate", () => {
   assert.deepEqual(partition([1, 2, 3, 4], (n) => n % 2 === 0), [[2, 4], [1, 3]]);
 });
+
+test("zip stops at the shorter array", () => {
+  assert.deepEqual(zip([1, 2, 3], ["a", "b"]), [[1, "a"], [2, "b"]]);
+});
