@@ -21,3 +21,8 @@ test("partition splits by predicate", () => {
 test("zip stops at the shorter array", () => {
   assert.deepEqual(zip([1, 2, 3], ["a", "b"]), [[1, "a"], [2, "b"]]);
 });
+
+test("range works like python", () => {
+  assert.deepEqual(range(4), [0, 1, 2, 3]);
+  assert.deepEqual(range(10, 0, -3), [10, 7, 4, 1]);
+});
