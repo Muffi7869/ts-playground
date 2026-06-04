@@ -37,3 +37,9 @@ export function range(start: number, end?: number, step = 1): number[] {
 export function sortBy<T>(arr: readonly T[], key: (item: T) => number | string): T[] {
   return [...arr].sort((a, b) => (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0));
 }
+
+export function countBy<T>(arr: readonly T[], key: (item: T) => string): Map<string, number> {
+  const counts = new Map<string, number>();
+  for (const item of arr) counts.set(key(item), (counts.get(key(item)) ?? 0) + 1);
+  return counts;
+}
