@@ -32,3 +32,7 @@ test("sortBy does not mutate", () => {
   assert.deepEqual(sortBy(input, (x) => x.n).map((x) => x.n), [1, 2, 3]);
   assert.equal(input[0].n, 3);
 });
+
+test("countBy counts", () => {
+  assert.equal(countBy(["x", "y", "x"], (s) => s).get("x"), 2);
+});
