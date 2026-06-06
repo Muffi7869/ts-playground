@@ -17,3 +17,9 @@ export function pick<T extends object, K extends keyof T>(obj: T, keys: K[]): Pi
   for (const k of keys) out[k] = obj[k];
   return out;
 }
+
+export function omit<T extends object, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
+  const out = { ...obj };
+  for (const k of keys) delete out[k];
+  return out;
+}
