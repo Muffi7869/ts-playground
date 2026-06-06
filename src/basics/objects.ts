@@ -38,3 +38,8 @@ export function deepEqual(a: unknown, b: unknown): boolean {
   if (ka.length !== kb.length) return false;
   return ka.every((k) => deepEqual((a as Record<string, unknown>)[k], (b as Record<string, unknown>)[k]));
 }
+
+export function deepFreeze<T extends object>(obj: T): Readonly<T> {
+  for (const v of Object.values(obj)) if (typeof v === "object" && v !== null) deepFreeze(v);
+  return Object.freeze(obj);
+}
