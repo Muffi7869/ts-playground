@@ -27,3 +27,7 @@ export function render<T>(state: ApiState<T>, show: (d: T) => string): string {
   if (state.status === "error") return `error: ${state.message}`;
   return state.status === "loading" ? "loading..." : "";
 }
+
+export function isString(v: unknown): v is string {
+  return typeof v === "string";
+}
