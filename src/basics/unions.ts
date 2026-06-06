@@ -31,3 +31,8 @@ export function render<T>(state: ApiState<T>, show: (d: T) => string): string {
 export function isString(v: unknown): v is string {
   return typeof v === "string";
 }
+
+export function toArray<T>(v: T | T[] | undefined): T[] {
+  if (v === undefined) return [];
+  return Array.isArray(v) ? v : [v];
+}
