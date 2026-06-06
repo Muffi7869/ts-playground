@@ -7,3 +7,7 @@ export interface User {
   age?: number;
   tags: string[];
 }
+
+export function createUser(id: number, name: string, email: string): User {
+  return { id, name, email, tags: [] };
+}
