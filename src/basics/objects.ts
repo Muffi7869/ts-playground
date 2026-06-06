@@ -29,3 +29,12 @@ export function invert<K extends PropertyKey, V extends PropertyKey>(obj: Record
   for (const [k, v] of Object.entries(obj) as [K, V][]) out[v] = k;
   return out;
 }
+
+export function deepEqual(a: unknown, b: unknown): boolean {
+  if (a === b) return true;
+  if (typeof a !== "object" || typeof b !== "object" || a === null || b === null) return false;
+  const ka = Object.keys(a);
+  const kb = Object.keys(b);
+  if (ka.length !== kb.length) return false;
+  return ka.every((k) => deepEqual((a as Record<string, unknown>)[k], (b as Record<string, unknown>)[k]));
+}
