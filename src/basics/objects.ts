@@ -43,3 +43,7 @@ export function deepFreeze<T extends object>(obj: T): Readonly<T> {
   for (const v of Object.values(obj)) if (typeof v === "object" && v !== null) deepFreeze(v);
   return Object.freeze(obj);
 }
+
+export function getPath(obj: unknown, path: string): unknown {
+  return path.split(".").reduce<unknown>((cur, key) => (cur == null ? undefined : (cur as Record<string, unknown>)[key]), obj);
+}
