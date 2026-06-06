@@ -21,3 +21,9 @@ export function area(s: Shape): number {
 }
 
 export type ApiState<T> = { status: "idle" } | { status: "loading" } | { status: "ok"; data: T } | { status: "error"; message: string };
+
+export function render<T>(state: ApiState<T>, show: (d: T) => string): string {
+  if (state.status === "ok") return show(state.data);
+  if (state.status === "error") return `error: ${state.message}`;
+  return state.status === "loading" ? "loading..." : "";
+}
