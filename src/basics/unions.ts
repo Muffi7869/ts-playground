@@ -19,3 +19,5 @@ export function area(s: Shape): number {
     }
   }
 }
+
+export type ApiState<T> = { status: "idle" } | { status: "loading" } | { status: "ok"; data: T } | { status: "error"; message: string };
