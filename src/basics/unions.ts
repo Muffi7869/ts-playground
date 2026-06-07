@@ -40,3 +40,7 @@ export function toArray<T>(v: T | T[] | undefined): T[] {
 export type Fish = { swim: () => string };
 
 export type Bird = { fly: () => string };
+
+export function move(animal: Fish | Bird): string {
+  return "swim" in animal ? animal.swim() : animal.fly();
+}
