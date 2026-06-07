@@ -44,3 +44,7 @@ export type Bird = { fly: () => string };
 export function move(animal: Fish | Bird): string {
   return "swim" in animal ? animal.swim() : animal.fly();
 }
+
+export function formatId(id: string | number): string {
+  return typeof id === "number" ? `#${id.toString().padStart(5, "0")}` : id.toUpperCase();
+}
