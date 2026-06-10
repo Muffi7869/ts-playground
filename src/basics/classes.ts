@@ -58,3 +58,16 @@ export class Savings extends Account {
     return this.balance;
   }
 }
+
+export class Temperature {
+  #celsius = 0;
+  get fahrenheit(): number {
+    return (this.#celsius * 9) / 5 + 32;
+  }
+  set fahrenheit(f: number) {
+    this.#celsius = ((f - 32) * 5) / 9;
+  }
+  get celsius(): number {
+    return this.#celsius;
+  }
+}
