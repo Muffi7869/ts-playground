@@ -25,3 +25,10 @@ test("sum and parse overloads", () => {
   assert.equal(sum(1, 2, 3), 6);
   assert.deepEqual(parse(["1", "2"]), [1, 2]);
 });
+
+test("compose and pipe", () => {
+  const inc = (n: number) => n + 1;
+  const dbl = (n: number) => n * 2;
+  assert.equal(compose(inc, dbl)(5), 11);
+  assert.equal(pipe(5, inc, dbl), 12);
+});
