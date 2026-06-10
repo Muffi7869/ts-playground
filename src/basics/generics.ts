@@ -20,3 +20,7 @@ export function maxBy<T>(arr: readonly T[], score: (item: T) => number): T | und
   }
   return best;
 }
+
+export interface HasLength {
+  length: number;
+}
