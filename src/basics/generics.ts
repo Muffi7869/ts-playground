@@ -64,3 +64,5 @@ export class Queue<T> {
     return this.items.length - this.head;
   }
 }
+
+export type Nullable<T> = { [K in keyof T]: T[K] | null };
