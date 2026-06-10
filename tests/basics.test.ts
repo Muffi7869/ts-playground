@@ -46,3 +46,10 @@ test("once and curry3", () => {
   assert.equal(init(), init());
   assert.equal(curry3((a: number, b: number, c: number) => a + b * c)(1)(2)(3), 7);
 });
+
+test("pick, omit, invert", () => {
+  const obj = { a: 1, b: 2, c: 3 };
+  assert.deepEqual(pick(obj, ["a", "c"]), { a: 1, c: 3 });
+  assert.deepEqual(omit(obj, ["a"]), { b: 2, c: 3 });
+  assert.deepEqual(invert({ x: "1", y: "2" }), { 1: "x", 2: "y" });
+});
