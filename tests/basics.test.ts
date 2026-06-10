@@ -59,3 +59,8 @@ test("deepEqual and getPath", () => {
   assert.equal(getPath({ a: { b: { c: 7 } } }, "a.b.c"), 7);
   assert.equal(getPath({}, "x.y"), undefined);
 });
+
+test("area handles every shape", () => {
+  assert.equal(area({ kind: "rect", w: 2, h: 3 }), 6);
+  assert.equal(area({ kind: "triangle", base: 4, height: 5 }), 10);
+});
