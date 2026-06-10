@@ -64,3 +64,8 @@ test("area handles every shape", () => {
   assert.equal(area({ kind: "rect", w: 2, h: 3 }), 6);
   assert.equal(area({ kind: "triangle", base: 4, height: 5 }), 10);
 });
+
+test("render api state", () => {
+  assert.equal(render({ status: "ok", data: [1, 2] }, (d) => `${d.length} items`), "2 items");
+  assert.equal(render({ status: "error", message: "404" }, String), "error: 404");
+});
