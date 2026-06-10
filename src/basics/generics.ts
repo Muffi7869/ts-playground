@@ -66,3 +66,9 @@ export class Queue<T> {
 }
 
 export type Nullable<T> = { [K in keyof T]: T[K] | null };
+
+export function mapValues<T extends object, R>(obj: T, fn: (v: T[keyof T]) => R): Record<keyof T, R> {
+  const out = {} as Record<keyof T, R>;
+  for (const k of Object.keys(obj) as (keyof T)[]) out[k] = fn(obj[k]);
+  return out;
+}
