@@ -24,3 +24,7 @@ export function maxBy<T>(arr: readonly T[], score: (item: T) => number): T | und
 export interface HasLength {
   length: number;
 }
+
+export function longest<T extends HasLength>(a: T, b: T): T {
+  return a.length >= b.length ? a : b;
+}
