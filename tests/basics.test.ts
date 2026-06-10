@@ -40,3 +40,9 @@ test("memoize only calls once per input", () => {
   sq(4);
   assert.equal(calls, 1);
 });
+
+test("once and curry3", () => {
+  const init = once(() => Math.random());
+  assert.equal(init(), init());
+  assert.equal(curry3((a: number, b: number, c: number) => a + b * c)(1)(2)(3), 7);
+});
