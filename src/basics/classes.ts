@@ -41,3 +41,20 @@ export class Checking extends Account {
     return true;
   }
 }
+
+export class Savings extends Account {
+  private rate: number;
+  constructor(owner: string, balance = 0, rate = 0.04) {
+    super(owner, balance);
+    this.rate = rate;
+  }
+  withdraw(amount: number): boolean {
+    if (amount > this.balance) return false;
+    this.balance -= amount;
+    return true;
+  }
+  addInterest(months: number): number {
+    this.balance *= (1 + this.rate / 12) ** months;
+    return this.balance;
+  }
+}
