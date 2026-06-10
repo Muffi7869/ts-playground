@@ -15,3 +15,8 @@ test("distance and swapPair", () => {
   assert.equal(distance({ x: 0, y: 0 }, { x: 3, y: 4 }), 5);
   assert.deepEqual(swapPair(["a", 1]), [1, "a"]);
 });
+
+test("opposite direction and clamp", () => {
+  assert.equal(opposite("east"), "west");
+  assert.equal(clamp(5, 0, 3), 3);
+});
