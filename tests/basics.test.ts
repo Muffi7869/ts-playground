@@ -32,3 +32,11 @@ test("compose and pipe", () => {
   assert.equal(compose(inc, dbl)(5), 11);
   assert.equal(pipe(5, inc, dbl), 12);
 });
+
+test("memoize only calls once per input", () => {
+  let calls = 0;
+  const sq = memoize((n: number) => (calls++, n * n));
+  sq(4);
+  sq(4);
+  assert.equal(calls, 1);
+});
