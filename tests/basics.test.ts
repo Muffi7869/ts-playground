@@ -20,3 +20,8 @@ test("opposite direction and clamp", () => {
   assert.equal(opposite("east"), "west");
   assert.equal(clamp(5, 0, 3), 3);
 });
+
+test("sum and parse overloads", () => {
+  assert.equal(sum(1, 2, 3), 6);
+  assert.deepEqual(parse(["1", "2"]), [1, 2]);
+});
