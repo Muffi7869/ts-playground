@@ -69,3 +69,9 @@ test("render api state", () => {
   assert.equal(render({ status: "ok", data: [1, 2] }, (d) => `${d.length} items`), "2 items");
   assert.equal(render({ status: "error", message: "404" }, String), "error: 404");
 });
+
+test("toArray and formatId", () => {
+  assert.deepEqual(toArray(undefined), []);
+  assert.deepEqual(toArray(3), [3]);
+  assert.equal(formatId(42), "#00042");
+});
