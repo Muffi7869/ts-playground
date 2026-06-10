@@ -53,3 +53,9 @@ test("pick, omit, invert", () => {
   assert.deepEqual(omit(obj, ["a"]), { b: 2, c: 3 });
   assert.deepEqual(invert({ x: "1", y: "2" }), { 1: "x", 2: "y" });
 });
+
+test("deepEqual and getPath", () => {
+  assert.ok(deepEqual({ a: [1, { b: 2 }] }, { a: [1, { b: 2 }] }));
+  assert.equal(getPath({ a: { b: { c: 7 } } }, "a.b.c"), 7);
+  assert.equal(getPath({}, "x.y"), undefined);
+});
