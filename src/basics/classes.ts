@@ -28,3 +28,16 @@ export abstract class Account implements Describable {
     return `${this.constructor.name}(${this.owner}, $${this.balance.toFixed(2)})`;
   }
 }
+
+export class Checking extends Account {
+  private overdraft: number;
+  constructor(owner: string, balance = 0, overdraft = 100) {
+    super(owner, balance);
+    this.overdraft = overdraft;
+  }
+  withdraw(amount: number): boolean {
+    if (amount > this.balance + this.overdraft) return false;
+    this.balance -= amount;
+    return true;
+  }
+}
