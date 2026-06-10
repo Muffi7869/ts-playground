@@ -10,3 +10,8 @@ test("describe narrows unknown values", () => {
   assert.equal(describeValue(2.5), "float");
   assert.equal(describeValue(null), "null");
 });
+
+test("distance and swapPair", () => {
+  assert.equal(distance({ x: 0, y: 0 }, { x: 3, y: 4 }), 5);
+  assert.deepEqual(swapPair(["a", 1]), [1, "a"]);
+});
