@@ -28,3 +28,19 @@ export interface HasLength {
 export function longest<T extends HasLength>(a: T, b: T): T {
   return a.length >= b.length ? a : b;
 }
+
+export class Stack<T> {
+  private items: T[] = [];
+  push(item: T): void {
+    this.items.push(item);
+  }
+  pop(): T | undefined {
+    return this.items.pop();
+  }
+  peek(): T | undefined {
+    return this.items[this.items.length - 1];
+  }
+  get size(): number {
+    return this.items.length;
+  }
+}
