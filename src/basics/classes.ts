@@ -71,3 +71,14 @@ export class Temperature {
     return this.#celsius;
   }
 }
+
+export class Counter {
+  private counts = new Map<string, number>();
+  add(key: string, n = 1): this {
+    this.counts.set(key, (this.counts.get(key) ?? 0) + n);
+    return this;
+  }
+  top(k: number): [string, number][] {
+    return [...this.counts].sort((a, b) => b[1] - a[1]).slice(0, k);
+  }
+}
