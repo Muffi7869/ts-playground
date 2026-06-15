@@ -22,3 +22,12 @@ export function mapResult<T, U, E>(r: Result<T, E>, fn: (v: T) => U): Result<U, 
 export function unwrapOr<T, E>(r: Result<T, E>, fallback: T): T {
   return r.ok ? r.value : fallback;
 }
+
+export function all<T, E>(results: Result<T, E>[]): Result<T[], E> {
+  const values: T[] = [];
+  for (const r of results) {
+    if (!r.ok) return r;
+    values.push(r.value);
+  }
+  return ok(values);
+}
