@@ -14,3 +14,7 @@ export function safeParseInt(s: string): Result<number> {
   const n = Number.parseInt(s, 10);
   return Number.isNaN(n) ? err(`not a number: ${s}`) : ok(n);
 }
+
+export function mapResult<T, U, E>(r: Result<T, E>, fn: (v: T) => U): Result<U, E> {
+  return r.ok ? ok(fn(r.value)) : r;
+}
