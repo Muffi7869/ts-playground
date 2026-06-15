@@ -18,3 +18,7 @@ export function safeParseInt(s: string): Result<number> {
 export function mapResult<T, U, E>(r: Result<T, E>, fn: (v: T) => U): Result<U, E> {
   return r.ok ? ok(fn(r.value)) : r;
 }
+
+export function unwrapOr<T, E>(r: Result<T, E>, fallback: T): T {
+  return r.ok ? r.value : fallback;
+}
