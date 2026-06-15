@@ -31,3 +31,11 @@ export function all<T, E>(results: Result<T, E>[]): Result<T[], E> {
   }
   return ok(values);
 }
+
+export function tryCatch<T>(fn: () => T): Result<T, Error> {
+  try {
+    return ok(fn());
+  } catch (e) {
+    return err(e instanceof Error ? e : new Error(String(e)));
+  }
+}
