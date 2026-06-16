@@ -39,3 +39,12 @@ export function tryCatch<T>(fn: () => T): Result<T, Error> {
     return err(e instanceof Error ? e : new Error(String(e)));
   }
 }
+
+export class ValidationError extends Error {
+  readonly field: string;
+  constructor(field: string, message: string) {
+    super(`${field}: ${message}`);
+    this.name = "ValidationError";
+    this.field = field;
+  }
+}
