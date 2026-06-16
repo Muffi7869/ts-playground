@@ -48,3 +48,7 @@ export class ValidationError extends Error {
     this.field = field;
   }
 }
+
+export function validateEmail(email: string): Result<string, ValidationError> {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? ok(email.toLowerCase()) : err(new ValidationError("email", "invalid format"));
+}
