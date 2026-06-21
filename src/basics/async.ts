@@ -45,3 +45,11 @@ export async function settle<T>(ps: Promise<T>[]): Promise<{ ok: T[]; failed: nu
   const okValues = results.flatMap((r) => (r.status === "fulfilled" ? [r.value] : []));
   return { ok: okValues, failed: results.length - okValues.length };
 }
+
+export function debounce<A extends unknown[]>(fn: (...args: A) => void, ms: number): (...args: A) => void {
+  let t: ReturnType<typeof setTimeout> | undefined;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), ms);
+  };
+}
