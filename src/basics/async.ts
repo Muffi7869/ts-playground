@@ -39,3 +39,9 @@ export async function mapLimit<T, R>(items: T[], limit: number, fn: (item: T) =>
   await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
   return results;
 }
+
+export async function settle<T>(ps: Promise<T>[]): Promise<{ ok: T[]; failed: number }> {
+  const results = await Promise.allSettled(ps);
+  const okValues = results.flatMap((r) => (r.status === "fulfilled" ? [r.value] : []));
+  return { ok: okValues, failed: results.length - okValues.length };
+}
