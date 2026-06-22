@@ -53,3 +53,10 @@ export function debounce<A extends unknown[]>(fn: (...args: A) => void, ms: numb
     t = setTimeout(() => fn(...args), ms);
   };
 }
+
+export async function* countdown(from: number, ms = 1): AsyncGenerator<number> {
+  for (let i = from; i > 0; i--) {
+    await sleep(ms);
+    yield i;
+  }
+}
