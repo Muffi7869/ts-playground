@@ -6,3 +6,5 @@ export interface Todo {
   done: boolean;
   due?: string;
 }
+
+export type TodoDraft = Omit<Todo, "id">;
