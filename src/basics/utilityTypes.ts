@@ -10,3 +10,5 @@ export interface Todo {
 export type TodoDraft = Omit<Todo, "id">;
 
 export type TodoPatch = Partial<Omit<Todo, "id">>;
+
+export type TodoPreview = Pick<Todo, "id" | "title">;
