@@ -28,3 +28,7 @@ export function makeGetters<T extends object>(obj: T): Getters<T> {
   }
   return out as Getters<T>;
 }
+
+export function applyPatch(todo: Todo, patch: TodoPatch): Todo {
+  return { ...todo, ...patch };
+}
