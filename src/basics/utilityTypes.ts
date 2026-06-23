@@ -32,3 +32,5 @@ export function makeGetters<T extends object>(obj: T): Getters<T> {
 export function applyPatch(todo: Todo, patch: TodoPatch): Todo {
   return { ...todo, ...patch };
 }
+
+export type ElementOf<T> = T extends readonly (infer E)[] ? E : never;
