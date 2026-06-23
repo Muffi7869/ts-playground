@@ -20,3 +20,11 @@ export type DeepReadonly<T> = { readonly [K in keyof T]: T[K] extends object ? D
 export type KeysOfType<T, V> = { [K in keyof T]: T[K] extends V ? K : never }[keyof T];
 
 export type Getters<T> = { [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K] };
+
+export function makeGetters<T extends object>(obj: T): Getters<T> {
+  const out: Record<string, () => unknown> = {};
+  for (const key of Object.keys(obj)) {
+    out[`get${key[0].toUpperCase()}${key.slice(1)}`] = () => (obj as Record<string, unknown>)[key];
+  }
+  return out as Getters<T>;
+}
