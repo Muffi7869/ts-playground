@@ -18,3 +18,5 @@ export type DeepPartial<T> = { [K in keyof T]?: T[K] extends object ? DeepPartia
 export type DeepReadonly<T> = { readonly [K in keyof T]: T[K] extends object ? DeepReadonly<T[K]> : T[K] };
 
 export type KeysOfType<T, V> = { [K in keyof T]: T[K] extends V ? K : never }[keyof T];
+
+export type Getters<T> = { [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K] };
