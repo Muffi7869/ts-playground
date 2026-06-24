@@ -36,3 +36,8 @@ export function applyPatch(todo: Todo, patch: TodoPatch): Todo {
 export type ElementOf<T> = T extends readonly (infer E)[] ? E : never;
 
 export type AwaitedReturn<F extends (...args: never[]) => unknown> = Awaited<ReturnType<F>>;
+
+export function createTodo(draft: TodoDraft, existing: Todo[]): Todo {
+  const id = existing.reduce((m, t) => Math.max(m, t.id), 0) + 1;
+  return { id, ...draft };
+}
