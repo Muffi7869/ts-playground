@@ -34,3 +34,5 @@ export function applyPatch(todo: Todo, patch: TodoPatch): Todo {
 }
 
 export type ElementOf<T> = T extends readonly (infer E)[] ? E : never;
+
+export type AwaitedReturn<F extends (...args: never[]) => unknown> = Awaited<ReturnType<F>>;
