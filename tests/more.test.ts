@@ -45,3 +45,13 @@ test("withTimeout rejects slow promises", async () => {
   await assert.rejects(withTimeout(sleep(50), 5), /timed out/);
   await withTimeout(sleep(1), 50);
 });
+
+test("retry eventually succeeds", async () => {
+  let n = 0;
+  const v = await retry(async () => {
+    if (++n < 3) throw new Error("flaky");
+    return "ok";
+  }, 5, 1);
+  assert.equal(v, "ok");
+  assert.equal(n, 3);
+});
