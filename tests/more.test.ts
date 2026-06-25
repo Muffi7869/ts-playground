@@ -65,3 +65,9 @@ test("settle counts failures", async () => {
   const r = await settle([Promise.resolve(1), Promise.reject(new Error("x")), Promise.resolve(3)]);
   assert.deepEqual(r, { ok: [1, 3], failed: 1 });
 });
+
+test("async generator countdown", async () => {
+  const seen: number[] = [];
+  for await (const n of countdown(3)) seen.push(n);
+  assert.deepEqual(seen, [3, 2, 1]);
+});
