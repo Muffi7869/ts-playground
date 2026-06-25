@@ -17,3 +17,9 @@ test("savings interest compounds", () => {
   const s = new Savings("x", 1000, 0.12);
   assert.ok(Math.abs(s.addInterest(12) - 1126.83) < 0.01);
 });
+
+test("temperature getters and setters", () => {
+  const t = new Temperature();
+  t.fahrenheit = 212;
+  assert.equal(t.celsius, 100);
+});
