@@ -23,3 +23,7 @@ test("temperature getters and setters", () => {
   t.fahrenheit = 212;
   assert.equal(t.celsius, 100);
 });
+
+test("counter chains and ranks", () => {
+  assert.deepEqual(new Counter().add("a").add("b", 3).add("a").top(1), [["b", 3]]);
+});
