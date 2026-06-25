@@ -27,3 +27,9 @@ test("temperature getters and setters", () => {
 test("counter chains and ranks", () => {
   assert.deepEqual(new Counter().add("a").add("b", 3).add("a").top(1), [["b", 3]]);
 });
+
+test("result helpers", () => {
+  assert.equal(unwrapOr(mapResult(safeParseInt("21"), (n) => n * 2), 0), 42);
+  assert.equal(unwrapOr(safeParseInt("nope"), -1), -1);
+  assert.deepEqual(all([safeParseInt("1"), safeParseInt("2")]), { ok: true, value: [1, 2] });
+});
