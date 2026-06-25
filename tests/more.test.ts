@@ -40,3 +40,8 @@ test("tryCatch and validateEmail", () => {
   assert.equal(validateEmail("Muffi@UCSD.edu").ok, true);
   assert.equal(validateEmail("nope").ok, false);
 });
+
+test("withTimeout rejects slow promises", async () => {
+  await assert.rejects(withTimeout(sleep(50), 5), /timed out/);
+  await withTimeout(sleep(1), 50);
+});
