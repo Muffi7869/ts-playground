@@ -55,3 +55,8 @@ test("retry eventually succeeds", async () => {
   assert.equal(v, "ok");
   assert.equal(n, 3);
 });
+
+test("mapLimit keeps order", async () => {
+  const out = await mapLimit([30, 10, 20], 2, async (ms) => (await sleep(ms), ms));
+  assert.deepEqual(out, [30, 10, 20]);
+});
