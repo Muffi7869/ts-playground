@@ -33,3 +33,10 @@ test("result helpers", () => {
   assert.equal(unwrapOr(safeParseInt("nope"), -1), -1);
   assert.deepEqual(all([safeParseInt("1"), safeParseInt("2")]), { ok: true, value: [1, 2] });
 });
+
+test("tryCatch and validateEmail", () => {
+  const r = tryCatch(() => JSON.parse("{bad"));
+  assert.equal(r.ok, false);
+  assert.equal(validateEmail("Muffi@UCSD.edu").ok, true);
+  assert.equal(validateEmail("nope").ok, false);
+});
