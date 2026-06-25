@@ -71,3 +71,15 @@ test("async generator countdown", async () => {
   for await (const n of countdown(3)) seen.push(n);
   assert.deepEqual(seen, [3, 2, 1]);
 });
+
+test("generic stack and queue", () => {
+  const s = new Stack<number>();
+  s.push(1);
+  s.push(2);
+  assert.equal(s.pop(), 2);
+  const q = new Queue<string>();
+  q.enqueue("a");
+  q.enqueue("b");
+  assert.equal(q.dequeue(), "a");
+  assert.equal(q.size, 1);
+});
