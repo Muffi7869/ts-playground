@@ -60,3 +60,8 @@ test("mapLimit keeps order", async () => {
   const out = await mapLimit([30, 10, 20], 2, async (ms) => (await sleep(ms), ms));
   assert.deepEqual(out, [30, 10, 20]);
 });
+
+test("settle counts failures", async () => {
+  const r = await settle([Promise.resolve(1), Promise.reject(new Error("x")), Promise.resolve(3)]);
+  assert.deepEqual(r, { ok: [1, 3], failed: 1 });
+});
