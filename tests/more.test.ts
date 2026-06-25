@@ -12,3 +12,8 @@ test("checking allows overdraft, savings doesn't", () => {
   assert.ok(c.withdraw(120));
   assert.ok(!s.withdraw(120));
 });
+
+test("savings interest compounds", () => {
+  const s = new Savings("x", 1000, 0.12);
+  assert.ok(Math.abs(s.addInterest(12) - 1126.83) < 0.01);
+});
