@@ -89,3 +89,10 @@ test("maxBy, longest, mapValues", () => {
   assert.equal(longest("abc", "de"), "abc");
   assert.deepEqual(mapValues({ a: 1, b: 2 }, (v) => v * 10), { a: 10, b: 20 });
 });
+
+test("utility type helpers", () => {
+  assert.equal(makeGetters({ name: "muffi" }).getName(), "muffi");
+  const t = createTodo({ title: "hw", done: false }, [{ id: 4, title: "x", done: true }]);
+  assert.equal(t.id, 5);
+  assert.equal(applyPatch(t, { done: true }).done, true);
+});
