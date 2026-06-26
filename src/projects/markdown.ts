@@ -16,3 +16,5 @@ export function heading(line: string): string | null {
   const m = /^(#{1,6})\s+(.*)$/.exec(line);
   return m ? `<h${m[1].length}>${inline(m[2])}</h${m[1].length}>` : null;
 }
+
+export type Block = { type: "p" | "ul" | "ol" | "code" | "h"; lines: string[] };
