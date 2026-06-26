@@ -11,3 +11,8 @@ export function inline(text: string): string {
     .replace(/\*([^*]+)\*/g, "<em>$1</em>")
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 }
+
+export function heading(line: string): string | null {
+  const m = /^(#{1,6})\s+(.*)$/.exec(line);
+  return m ? `<h${m[1].length}>${inline(m[2])}</h${m[1].length}>` : null;
+}
