@@ -83,3 +83,9 @@ test("generic stack and queue", () => {
   assert.equal(q.dequeue(), "a");
   assert.equal(q.size, 1);
 });
+
+test("maxBy, longest, mapValues", () => {
+  assert.deepEqual(maxBy([{ s: 1 }, { s: 9 }, { s: 4 }], (x) => x.s), { s: 9 });
+  assert.equal(longest("abc", "de"), "abc");
+  assert.deepEqual(mapValues({ a: 1, b: 2 }, (v) => v * 10), { a: 10, b: 20 });
+});
