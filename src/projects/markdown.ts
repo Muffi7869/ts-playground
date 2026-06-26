@@ -18,3 +18,34 @@ export function heading(line: string): string | null {
 }
 
 export type Block = { type: "p" | "ul" | "ol" | "code" | "h"; lines: string[] };
+
+export function toBlocks(md: string): Block[] {
+  const blocks: Block[] = [];
+  let cur: Block | null = null;
+  let inCode = false;
+  for (const line of md.split("\n")) {
+    if (line.startsWith("```")) {
+      if (inCode) {
+        blocks.push(cur!);
+        cur = null;
+      } else {
+        if (cur) blocks.push(cur);
+        cur = { type: "code", lines: [] };
+      }
+      inCode = !inCode;
+      continue;
+    }
+    if (inCode) {
+      cur!.lines.push(line);
+      continue;
+    }
+    const type: Block["type"] | null = line.trim() === "" ? null : /^#{1,6}\s/.test(line) ? "h" : /^[-*]\s/.test(line) ? "ul" : /^\d+\.\s/.test(line) ? "ol" : "p";
+    if (cur && (type !== cur.type || type === "h")) {
+      blocks.push(cur);
+      cur = null;
+    }
+    if (type) (cur ??= { type, lines: [] }).lines.push(line);
+  }
+  if (cur) blocks.push(cur);
+  return blocks;
+}
