@@ -65,3 +65,7 @@ export function renderBlock(b: Block): string {
       return `<p>${inline(b.lines.join(" "))}</p>`;
   }
 }
+
+export function markdownToHtml(md: string): string {
+  return toBlocks(md).map(renderBlock).join("\n");
+}
