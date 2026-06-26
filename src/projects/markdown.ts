@@ -49,3 +49,19 @@ export function toBlocks(md: string): Block[] {
   if (cur) blocks.push(cur);
   return blocks;
 }
+
+export function renderBlock(b: Block): string {
+  switch (b.type) {
+    case "h":
+      return heading(b.lines[0])!;
+    case "code":
+      return `<pre><code>${escapeHtml(b.lines.join("\n"))}</code></pre>`;
+    case "ul":
+    case "ol": {
+      const items = b.lines.map((l) => `<li>${inline(l.replace(/^([-*]|\d+\.)\s+/, ""))}</li>`).join("");
+      return `<${b.type}>${items}</${b.type}>`;
+    }
+    default:
+      return `<p>${inline(b.lines.join(" "))}</p>`;
+  }
+}
