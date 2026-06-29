@@ -69,3 +69,11 @@ export function renderBlock(b: Block): string {
 export function markdownToHtml(md: string): string {
   return toBlocks(md).map(renderBlock).join("\n");
 }
+
+export function tableOfContents(md: string): { level: number; text: string; slug: string }[] {
+  return md
+    .split("\n")
+    .map((l) => /^(#{1,3})\s+(.*)$/.exec(l))
+    .filter((m): m is RegExpExecArray => m !== null)
+    .map((m) => ({ level: m[1].length, text: m[2], slug: m[2].toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") }));
+}
