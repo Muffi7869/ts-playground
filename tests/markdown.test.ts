@@ -23,3 +23,8 @@ test("blocks group consecutive list items", () => {
 test("code blocks keep content raw", () => {
   assert.equal(markdownToHtml("```\n<b>\n```"), "<pre><code>&lt;b&gt;</code></pre>");
 });
+
+test("full document", () => {
+  const html = markdownToHtml("# Title\n\n1. one\n2. two\n\nsome *text*");
+  assert.equal(html, "<h1>Title</h1>\n<ol><li>one</li><li>two</li></ol>\n<p>some <em>text</em></p>");
+});
