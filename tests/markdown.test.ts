@@ -5,3 +5,7 @@ import { inline, heading, toBlocks, markdownToHtml, tableOfContents } from "../s
 test("inline formatting", () => {
   assert.equal(inline("**bold** and *it* and `x<y`"), "<strong>bold</strong> and <em>it</em> and <code>x&lt;y</code>");
 });
+
+test("links", () => {
+  assert.equal(inline("[site](https://rajkotwala.com)"), '<a href="https://rajkotwala.com">site</a>');
+});
