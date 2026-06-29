@@ -14,3 +14,8 @@ test("headings", () => {
   assert.equal(heading("## hello"), "<h2>hello</h2>");
   assert.equal(heading("not a heading"), null);
 });
+
+test("blocks group consecutive list items", () => {
+  const blocks = toBlocks("# t\n\n- a\n- b\n\npara one\npara two");
+  assert.deepEqual(blocks.map((b) => b.type), ["h", "ul", "p"]);
+});
