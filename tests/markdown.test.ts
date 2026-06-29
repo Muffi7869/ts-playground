@@ -19,3 +19,7 @@ test("blocks group consecutive list items", () => {
   const blocks = toBlocks("# t\n\n- a\n- b\n\npara one\npara two");
   assert.deepEqual(blocks.map((b) => b.type), ["h", "ul", "p"]);
 });
+
+test("code blocks keep content raw", () => {
+  assert.equal(markdownToHtml("```\n<b>\n```"), "<pre><code>&lt;b&gt;</code></pre>");
+});
