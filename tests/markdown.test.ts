@@ -9,3 +9,8 @@ test("inline formatting", () => {
 test("links", () => {
   assert.equal(inline("[site](https://rajkotwala.com)"), '<a href="https://rajkotwala.com">site</a>');
 });
+
+test("headings", () => {
+  assert.equal(heading("## hello"), "<h2>hello</h2>");
+  assert.equal(heading("not a heading"), null);
+});
