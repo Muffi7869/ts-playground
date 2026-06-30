@@ -28,3 +28,7 @@ test("full document", () => {
   const html = markdownToHtml("# Title\n\n1. one\n2. two\n\nsome *text*");
   assert.equal(html, "<h1>Title</h1>\n<ol><li>one</li><li>two</li></ol>\n<p>some <em>text</em></p>");
 });
+
+test("table of contents slugs", () => {
+  assert.deepEqual(tableOfContents("# Intro\n## Set Up!\ntext")[1], { level: 2, text: "Set Up!", slug: "set-up" });
+});
