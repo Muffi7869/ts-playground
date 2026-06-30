@@ -7,3 +7,5 @@ npm i
 npm test
 npm run typecheck
 ```
+
+## src/basics
