@@ -24,3 +24,7 @@ export function onceEvent<E extends Record<string, unknown>, K extends keyof E>(
     fn(p);
   });
 }
+
+export function waitFor<E extends Record<string, unknown>, K extends keyof E>(em: Emitter<E>, event: K): Promise<E[K]> {
+  return new Promise((resolve) => onceEvent(em, event, resolve));
+}
