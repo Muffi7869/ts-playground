@@ -22,3 +22,46 @@ export class LRU<K, V> {
     return [...this.map.keys()];
   }
 }
+
+export class PriorityQueue<T> {
+  private heap: T[] = [];
+  private readonly less: (a: T, b: T) => boolean;
+  constructor(less: (a: T, b: T) => boolean) {
+    this.less = less;
+  }
+  get size(): number {
+    return this.heap.length;
+  }
+  push(item: T): void {
+    const h = this.heap;
+    h.push(item);
+    let i = h.length - 1;
+    while (i > 0) {
+      const p = (i - 1) >> 1;
+      if (!this.less(h[i], h[p])) break;
+      [h[i], h[p]] = [h[p], h[i]];
+      i = p;
+    }
+  }
+  pop(): T | undefined {
+    const h = this.heap;
+    if (h.length === 0) return undefined;
+    const top = h[0];
+    const last = h.pop()!;
+    if (h.length) {
+      h[0] = last;
+      let i = 0;
+      for (;;) {
+        const l = 2 * i + 1;
+        const r = l + 1;
+        let m = i;
+        if (l < h.length && this.less(h[l], h[m])) m = l;
+        if (r < h.length && this.less(h[r], h[m])) m = r;
+        if (m === i) break;
+        [h[i], h[m]] = [h[m], h[i]];
+        i = m;
+      }
+    }
+    return top;
+  }
+}
