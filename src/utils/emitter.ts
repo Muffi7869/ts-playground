@@ -17,3 +17,10 @@ export class Emitter<Events extends Record<string, unknown>> {
     return set?.size ?? 0;
   }
 }
+
+export function onceEvent<E extends Record<string, unknown>, K extends keyof E>(em: Emitter<E>, event: K, fn: Listener<E[K]>): void {
+  const off = em.on(event, (p) => {
+    off();
+    fn(p);
+  });
+}
