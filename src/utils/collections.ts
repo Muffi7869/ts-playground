@@ -65,3 +65,5 @@ export class PriorityQueue<T> {
     return top;
   }
 }
+
+export type WeightedGraph = Record<string, Record<string, number>>;
