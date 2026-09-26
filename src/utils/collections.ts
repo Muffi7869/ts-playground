@@ -67,3 +67,20 @@ export class PriorityQueue<T> {
 }
 
 export type WeightedGraph = Record<string, Record<string, number>>;
+
+export function dijkstra(g: WeightedGraph, start: string): Record<string, number> {
+  const dist: Record<string, number> = { [start]: 0 };
+  const pq = new PriorityQueue<[string, number]>((a, b) => a[1] < b[1]);
+  pq.push([start, 0]);
+  while (pq.size) {
+    const [v, d] = pq.pop()!;
+    if (d > (dist[v] ?? Infinity)) continue;
+    for (const [w, cost] of Object.entries(g[v] ?? {})) {
+      if (d + cost < (dist[w] ?? Infinity)) {
+        dist[w] = d + cost;
+        pq.push([w, dist[w]]);
+      }
+    }
+  }
+  return dist;
+}
