@@ -84,3 +84,29 @@ export function dijkstra(g: WeightedGraph, start: string): Record<string, number
   }
   return dist;
 }
+
+export class Trie {
+  private root: Map<string, unknown> = new Map();
+  insert(word: string): void {
+    let node = this.root;
+    for (const ch of word) {
+      if (!node.has(ch)) node.set(ch, new Map());
+      node = node.get(ch) as Map<string, unknown>;
+    }
+    node.set("$", true);
+  }
+  startsWith(prefix: string): string[] {
+    let node = this.root;
+    for (const ch of prefix) {
+      const next = node.get(ch);
+      if (!next) return [];
+      node = next as Map<string, unknown>;
+    }
+    const out: string[] = [];
+    const walk = (n: Map<string, unknown>, acc: string) => {
+      for (const [k, v] of n) k === "$" ? out.push(acc) : walk(v as Map<string, unknown>, acc + k);
+    };
+    walk(node, prefix);
+    return out.sort();
+  }
+}
