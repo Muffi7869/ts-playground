@@ -59,3 +59,19 @@ export function array<T>(item: Schema<T>): Schema<T[]> {
     },
   };
 }
+
+export function object<Shape extends Record<string, Schema<unknown>>>(shape: Shape): Schema<{ [K in keyof Shape]: Infer<Shape[K]> }> {
+  return {
+    parse(v, path = "") {
+      if (typeof v !== "object" || v === null || Array.isArray(v)) return fail(path, "expected object");
+      const out: Record<string, unknown> = {};
+      const issues: Issue[] = [];
+      for (const key of Object.keys(shape)) {
+        const r = shape[key].parse((v as Record<string, unknown>)[key], path ? `${path}.${key}` : key);
+        if (r.success) out[key] = r.data;
+        else issues.push(...r.issues);
+      }
+      return issues.length ? { success: false, issues } : { success: true, data: out as { [K in keyof Shape]: Infer<Shape[K]> } };
+    },
+  };
+}
