@@ -43,3 +43,19 @@ export function boolean(): Schema<boolean> {
 export function optional<T>(inner: Schema<T>): Schema<T | undefined> {
   return { parse: (v, path) => (v === undefined ? { success: true, data: undefined } : inner.parse(v, path)) };
 }
+
+export function array<T>(item: Schema<T>): Schema<T[]> {
+  return {
+    parse(v, path = "") {
+      if (!Array.isArray(v)) return fail(path, "expected array");
+      const out: T[] = [];
+      const issues: Issue[] = [];
+      v.forEach((x, i) => {
+        const r = item.parse(x, `${path}[${i}]`);
+        if (r.success) out.push(r.data);
+        else issues.push(...r.issues);
+      });
+      return issues.length ? { success: false, issues } : { success: true, data: out };
+    },
+  };
+}
