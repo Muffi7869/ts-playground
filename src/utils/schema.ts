@@ -35,3 +35,7 @@ export function number(opts: { int?: boolean; min?: number; max?: number } = {})
     },
   };
 }
+
+export function boolean(): Schema<boolean> {
+  return { parse: (v, path = "") => (typeof v === "boolean" ? { success: true, data: v } : fail(path, "expected boolean")) };
+}
