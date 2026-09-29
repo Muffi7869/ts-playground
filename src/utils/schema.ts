@@ -7,3 +7,5 @@ export type ParseResult<T> = { success: true; data: T } | { success: false; issu
 export interface Schema<T> {
   parse(value: unknown, path?: string): ParseResult<T>;
 }
+
+export type Infer<S> = S extends Schema<infer T> ? T : never;
