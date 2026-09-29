@@ -75,3 +75,9 @@ export function object<Shape extends Record<string, Schema<unknown>>>(shape: Sha
     },
   };
 }
+
+export function oneOf<const T extends readonly string[]>(values: T): Schema<T[number]> {
+  return {
+    parse: (v, path = "") => (typeof v === "string" && values.includes(v) ? { success: true, data: v as T[number] } : fail(path, `expected one of ${values.join(", ")}`)),
+  };
+}
