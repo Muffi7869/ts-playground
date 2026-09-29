@@ -9,3 +9,5 @@ export interface Schema<T> {
 }
 
 export type Infer<S> = S extends Schema<infer T> ? T : never;
+
+const fail = (path: string, message: string): ParseResult<never> => ({ success: false, issues: [{ path: path || "(root)", message }] });
