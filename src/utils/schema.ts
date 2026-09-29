@@ -23,3 +23,15 @@ export function string(opts: { min?: number; max?: number; email?: boolean } = {
     },
   };
 }
+
+export function number(opts: { int?: boolean; min?: number; max?: number } = {}): Schema<number> {
+  return {
+    parse(v, path = "") {
+      if (typeof v !== "number" || Number.isNaN(v)) return fail(path, "expected number");
+      if (opts.int && !Number.isInteger(v)) return fail(path, "expected integer");
+      if (opts.min !== undefined && v < opts.min) return fail(path, `must be >= ${opts.min}`);
+      if (opts.max !== undefined && v > opts.max) return fail(path, `must be <= ${opts.max}`);
+      return { success: true, data: v };
+    },
+  };
+}
