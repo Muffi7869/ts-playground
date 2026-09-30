@@ -6,3 +6,13 @@ import { reducer, initialBoard, velocity, byAssignee, countIn } from "../src/pro
 import { LRU, PriorityQueue, dijkstra, Trie } from "../src/utils/collections.ts";
 
 type Events = { login: { user: string }; logout: undefined };
+
+test("emitter delivers typed payloads", () => {
+  const em = new Emitter<Events>();
+  const seen: string[] = [];
+  const off = em.on("login", (p) => seen.push(p.user));
+  em.emit("login", { user: "muffi" });
+  off();
+  assert.equal(em.emit("login", { user: "sam" }), 0);
+  assert.deepEqual(seen, ["muffi"]);
+});
