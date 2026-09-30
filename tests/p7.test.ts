@@ -4,3 +4,5 @@ import { Emitter, onceEvent, waitFor } from "../src/utils/emitter.ts";
 import { string, number, boolean, optional, array, object, oneOf, type Infer } from "../src/utils/schema.ts";
 import { reducer, initialBoard, velocity, byAssignee, countIn } from "../src/projects/kanban.ts";
 import { LRU, PriorityQueue, dijkstra, Trie } from "../src/utils/collections.ts";
+
+type Events = { login: { user: string }; logout: undefined };
