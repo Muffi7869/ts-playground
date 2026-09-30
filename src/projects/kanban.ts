@@ -49,3 +49,7 @@ export function reducer(board: Board, action: Action): Board {
     }
   }
 }
+
+export function velocity(board: Board): number {
+  return board.cards.filter((c) => c.column === "done").reduce((s, c) => s + c.points, 0);
+}
