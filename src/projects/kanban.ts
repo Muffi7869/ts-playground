@@ -15,3 +15,10 @@ export interface Board {
   wipLimit: number;
   history: string[];
 }
+
+export type Action =
+  | { type: "add"; card: Omit<Card, "column"> }
+  | { type: "move"; id: string; to: ColumnId }
+  | { type: "assign"; id: string; who: string }
+  | { type: "remove"; id: string }
+  | { type: "undo" };
