@@ -9,3 +9,9 @@ export interface Card {
   points: number;
   assignee?: string;
 }
+
+export interface Board {
+  cards: Card[];
+  wipLimit: number;
+  history: string[];
+}
