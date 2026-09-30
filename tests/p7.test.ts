@@ -16,3 +16,12 @@ test("emitter delivers typed payloads", () => {
   assert.equal(em.emit("login", { user: "sam" }), 0);
   assert.deepEqual(seen, ["muffi"]);
 });
+
+test("onceEvent fires a single time", () => {
+  const em = new Emitter<Events>();
+  let n = 0;
+  onceEvent(em, "logout", () => n++);
+  em.emit("logout", undefined);
+  em.emit("logout", undefined);
+  assert.equal(n, 1);
+});
