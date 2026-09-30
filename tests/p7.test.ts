@@ -25,3 +25,9 @@ test("onceEvent fires a single time", () => {
   em.emit("logout", undefined);
   assert.equal(n, 1);
 });
+
+test("waitFor resolves with the payload", async () => {
+  const em = new Emitter<Events>();
+  setTimeout(() => em.emit("login", { user: "late" }), 1);
+  assert.deepEqual(await waitFor(em, "login"), { user: "late" });
+});
