@@ -53,3 +53,9 @@ export function reducer(board: Board, action: Action): Board {
 export function velocity(board: Board): number {
   return board.cards.filter((c) => c.column === "done").reduce((s, c) => s + c.points, 0);
 }
+
+export function byAssignee(board: Board): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const c of board.cards) if (c.assignee) out[c.assignee] = (out[c.assignee] ?? 0) + c.points;
+  return out;
+}
