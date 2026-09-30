@@ -22,3 +22,5 @@ export type Action =
   | { type: "assign"; id: string; who: string }
   | { type: "remove"; id: string }
   | { type: "undo" };
+
+export const initialBoard = (wipLimit = 3): Board => ({ cards: [], wipLimit, history: [] });
