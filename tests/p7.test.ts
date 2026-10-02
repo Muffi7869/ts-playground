@@ -41,3 +41,12 @@ const signup = object({
 });
 
 type Signup = Infer<typeof signup>;
+
+test("schema accepts valid input and infers types", () => {
+  const r = signup.parse({ email: "m@ucsd.edu", age: 19, role: "student", tags: ["cs"] });
+  assert.equal(r.success, true);
+  if (r.success) {
+    const s: Signup = r.data;
+    assert.equal(s.role, "student");
+  }
+});
