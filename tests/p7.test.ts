@@ -76,3 +76,12 @@ test("kanban undo, velocity, assignee points", () => {
   b = reducer(b, { type: "undo" });
   assert.equal(velocity(b), 0);
 });
+
+test("lru evicts least recently used", () => {
+  const c = new LRU<string, number>(2);
+  c.set("a", 1);
+  c.set("b", 2);
+  c.get("a");
+  c.set("c", 3);
+  assert.deepEqual(c.keys(), ["a", "c"]);
+});
