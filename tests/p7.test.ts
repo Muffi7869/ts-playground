@@ -39,3 +39,5 @@ const signup = object({
   newsletter: optional(boolean()),
   tags: array(string({ min: 1 })),
 });
+
+type Signup = Infer<typeof signup>;
