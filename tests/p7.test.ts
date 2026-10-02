@@ -65,3 +65,14 @@ test("kanban add, move and wip limit", () => {
   b = reducer(b, { type: "move", id: "2", to: "doing" });
   assert.equal(countIn(b, "doing"), 1);
 });
+
+test("kanban undo, velocity, assignee points", () => {
+  let b = initialBoard();
+  b = reducer(b, { type: "add", card: { id: "a", title: "x", points: 2 } });
+  b = reducer(b, { type: "assign", id: "a", who: "muffi" });
+  b = reducer(b, { type: "move", id: "a", to: "done" });
+  assert.equal(velocity(b), 2);
+  assert.deepEqual(byAssignee(b), { muffi: 2 });
+  b = reducer(b, { type: "undo" });
+  assert.equal(velocity(b), 0);
+});
