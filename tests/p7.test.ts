@@ -50,3 +50,9 @@ test("schema accepts valid input and infers types", () => {
     assert.equal(s.role, "student");
   }
 });
+
+test("schema reports every issue with paths", () => {
+  const r = signup.parse({ email: "bad", age: 12.5, role: "ceo", tags: ["ok", ""] });
+  assert.equal(r.success, false);
+  if (!r.success) assert.deepEqual(r.issues.map((i) => i.path), ["email", "age", "role", "tags[1]"]);
+});
