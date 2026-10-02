@@ -56,3 +56,12 @@ test("schema reports every issue with paths", () => {
   assert.equal(r.success, false);
   if (!r.success) assert.deepEqual(r.issues.map((i) => i.path), ["email", "age", "role", "tags[1]"]);
 });
+
+test("kanban add, move and wip limit", () => {
+  let b = initialBoard(1);
+  b = reducer(b, { type: "add", card: { id: "1", title: "login page", points: 3 } });
+  b = reducer(b, { type: "add", card: { id: "2", title: "api", points: 5 } });
+  b = reducer(b, { type: "move", id: "1", to: "doing" });
+  b = reducer(b, { type: "move", id: "2", to: "doing" });
+  assert.equal(countIn(b, "doing"), 1);
+});
