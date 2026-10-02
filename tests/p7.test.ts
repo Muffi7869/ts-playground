@@ -31,3 +31,11 @@ test("waitFor resolves with the payload", async () => {
   setTimeout(() => em.emit("login", { user: "late" }), 1);
   assert.deepEqual(await waitFor(em, "login"), { user: "late" });
 });
+
+const signup = object({
+  email: string({ email: true }),
+  age: number({ int: true, min: 13 }),
+  role: oneOf(["student", "admin"] as const),
+  newsletter: optional(boolean()),
+  tags: array(string({ min: 1 })),
+});
