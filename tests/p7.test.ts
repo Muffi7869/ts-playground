@@ -91,3 +91,8 @@ test("priority queue pops in order", () => {
   [5, 1, 4, 2, 3].forEach((n) => pq.push(n));
   assert.deepEqual([pq.pop(), pq.pop(), pq.pop()], [1, 2, 3]);
 });
+
+test("dijkstra shortest distances", () => {
+  const g = { A: { B: 4, C: 1 }, C: { B: 2, D: 7 }, B: { D: 1 } };
+  assert.deepEqual(dijkstra(g, "A"), { A: 0, C: 1, B: 3, D: 4 });
+});
