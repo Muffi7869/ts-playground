@@ -85,3 +85,9 @@ test("lru evicts least recently used", () => {
   c.set("c", 3);
   assert.deepEqual(c.keys(), ["a", "c"]);
 });
+
+test("priority queue pops in order", () => {
+  const pq = new PriorityQueue<number>((a, b) => a < b);
+  [5, 1, 4, 2, 3].forEach((n) => pq.push(n));
+  assert.deepEqual([pq.pop(), pq.pop(), pq.pop()], [1, 2, 3]);
+});
