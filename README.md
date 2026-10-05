@@ -15,3 +15,10 @@ types and narrowing, functions (overloads, compose, memoize, curry), array helpe
 ## src/projects
 
 - `markdown.ts` - tiny markdown to html converter (headings, lists, code blocks, links, toc)
+- `kanban.ts` - kanban board as a pure reducer with wip limits and undo
+
+## src/utils
+
+- `emitter.ts` - type safe event emitter (event names and payloads checked at compile time)
+- `schema.ts` - mini zod clone, infers the ts type from the validator
+- `collections.ts` - LRU cache, priority queue, dijkstra, trie
