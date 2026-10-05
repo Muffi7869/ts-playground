@@ -96,3 +96,9 @@ test("dijkstra shortest distances", () => {
   const g = { A: { B: 4, C: 1 }, C: { B: 2, D: 7 }, B: { D: 1 } };
   assert.deepEqual(dijkstra(g, "A"), { A: 0, C: 1, B: 3, D: 4 });
 });
+
+test("trie prefix search", () => {
+  const t = new Trie();
+  ["tea", "ten", "to", "inn"].forEach((w) => t.insert(w));
+  assert.deepEqual(t.startsWith("te"), ["tea", "ten"]);
+});
